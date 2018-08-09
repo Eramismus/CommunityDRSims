@@ -111,6 +111,9 @@ if __name__ == "__main__":
 	
 	for Sim in Sim_list:
 		emulate_jmod(Sim.emu, Sim.meas_vars, Sim.meas_sampl, '1/1/2017 00:00:00', start)
+		Sim.start_temp = Sim.emu.display_measurements('Measured').values[-1][0]-273.15
+		Sim.mpc.measurements = Sim.emu.measurements
+		print(Sim.start_temp)
 	
 	for simtime in sim_range:
 		print('%%%%%%%%% IN LOOP: ' + str(i) + ' %%%%%%%%%%%%%%%%%') 

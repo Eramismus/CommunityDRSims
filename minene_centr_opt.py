@@ -181,66 +181,62 @@ SimAggr.init_models(use_ukf=0, use_fmu_emu=1, use_fmu_mpc=0) # Use for initialis
 # Instantiate Simulators for the emulation models
 Emu_list = []
 i=0
-j = 0
-rand = np.random.choice(range(0,len(bldg_list)),emus, replace=False)
 for bldg in bldg_list:
-	for number in rand:
-		if i == number:
-			bldg = bldg_list[i]
-			print('Instantiating emulation models, loop: ' + str(i))
-			Sim = SimHandler(sim_start = start,
-						sim_end = opt_end_str,
-						meas_sampl = meas_sampl
-						)
-			
-			model_id = 'R2CW'		
-			
-			Sim.moinfo_mpc = (os.path.join(Sim.simu_path, 'Tutorial_'+model_id+'.mo'),
-						'Tutorial_'+model_id+'.'+model_id,
-						{}
-						)
-			
-			Sim.building = bldg+'_'+model_id
-			
-			Sim.fmupath_mpc = os.path.join(Sim.simu_path, 'fmus', community, 'Tutorial_'+model_id+'_'+model_id+'.fmu')
-			
-			Sim.fmupath_emu = os.path.join(Sim.simu_path, 'fmus', community, community+'_'+bldg+'_'+bldg+'_Models_'+bldg+'_House_mpc.fmu')
-			
-			Sim.fmupath_ref = os.path.join(Sim.simu_path, 'fmus',community, community+'_'+bldg+'_'+bldg+'_Models_'+bldg+'_House_PI.fmu')
-			
-			Sim.moinfo_emu = (os.path.join(Sim.mod_path, community, bldg,bldg+'_Models',bldg+'_House_mpc.mo'),	community+'.'+bldg+'.'+bldg+'_Models.'+bldg+'_House_mpc',
-			{}
-			)
-			
-			Sim.moinfo_emu_ref = (os.path.join(Sim.mod_path, community, bldg,bldg+'_Models',bldg+'_House_PI.mo'),	community+'.'+bldg+'.'+bldg+'_Models.'+bldg+'_House_PI',
-			{}
-			)
-			
-			Sim.weather = SimAggr.weather
-			Sim.param_file = os.path.join(Sim.simu_path,'csvs','Parameters_R2CW.csv')
-			Sim.weather = SimAggr.weather
-			Sim.get_params()
-			Sim.get_control()
-			
-			Sim.parameters.data = load_namespace(os.path.join(SimAggr.simu_path, 'jmod sysid ResidentialCommunityUK results', 'est_params_'+Sim.building))
-			Sim.other_input = load_namespace(os.path.join(SimAggr.simu_path, 'mincost vs minene', 'minene_opt results', 'other_input_'+Sim.building))
-			Sim.constraints = load_namespace(os.path.join(SimAggr.simu_path, 'mincost vs minene', 'minene_opt results', 'constraints_'+Sim.building))
-			
-			Sim.init_models(use_ukf=0, use_fmu_emu = 1, use_fmu_mpc = 1)
-			
-			Emu_list.append(Sim)
+	print('Instantiating emulation models, loop: ' + str(i))
+	Sim = SimHandler(sim_start = start,
+				sim_end = opt_end_str,
+				meas_sampl = meas_sampl
+				)
+	
+	model_id = 'R2CW'		
+	
+	Sim.moinfo_mpc = (os.path.join(Sim.simu_path, 'Tutorial_'+model_id+'.mo'),
+				'Tutorial_'+model_id+'.'+model_id,
+				{}
+				)
+	
+	Sim.building = bldg+'_'+model_id
+	
+	Sim.fmupath_mpc = os.path.join(Sim.simu_path, 'fmus', community, 'Tutorial_'+model_id+'_'+model_id+'.fmu')
+	
+	Sim.fmupath_emu = os.path.join(Sim.simu_path, 'fmus', community, community+'_'+bldg+'_'+bldg+'_Models_'+bldg+'_House_mpc.fmu')
+	
+	Sim.fmupath_ref = os.path.join(Sim.simu_path, 'fmus',community, community+'_'+bldg+'_'+bldg+'_Models_'+bldg+'_House_PI.fmu')
+	
+	Sim.moinfo_emu = (os.path.join(Sim.mod_path, community, bldg,bldg+'_Models',bldg+'_House_mpc.mo'),	community+'.'+bldg+'.'+bldg+'_Models.'+bldg+'_House_mpc',
+	{}
+	)
+	
+	Sim.moinfo_emu_ref = (os.path.join(Sim.mod_path, community, bldg,bldg+'_Models',bldg+'_House_PI.mo'),	community+'.'+bldg+'.'+bldg+'_Models.'+bldg+'_House_PI',
+	{}
+	)
+	
+	Sim.weather = SimAggr.weather
+	Sim.param_file = os.path.join(Sim.simu_path,'csvs','Parameters_R2CW.csv')
+	Sim.weather = SimAggr.weather
+	Sim.get_params()
+	Sim.get_control()
+	
+	Sim.parameters.data = load_namespace(os.path.join(SimAggr.simu_path, 'jmod sysid ResidentialCommunityUK results', 'est_params_'+Sim.building))
+	Sim.other_input = load_namespace(os.path.join(SimAggr.simu_path, 'mincost vs minene', 'minene_opt results', 'other_input_'+Sim.building))
+	Sim.constraints = load_namespace(os.path.join(SimAggr.simu_path, 'mincost vs minene', 'minene_opt results', 'constraints_'+Sim.building))
+	
+	Sim.init_models(use_ukf=0, use_fmu_emu = 1, use_fmu_mpc = 1)
+	
+	Emu_list.append(Sim)
 	i = i+1
+
+for Emu in Emu_list:
+	emulate_jmod(Emu.emu, Emu.meas_vars, Emu.meas_sampl, '1/1/2017 00:00:00', start)
+	Emu.start_temp = Emu.emu.display_measurements('Measured').values[1][-1]-273.15
+	Emu.mpc.measurements = Emu.emu.measurements
 
 start_temps = []
 k = 0
-l = 0
 for bldg in bldg_list:
-	if k in rand:
-		start_temps.append(Emu_list[l].start_temp)
-		l = l+1
-	else:
-			start_temps.append(Emu_list[np.random.randint(0,len(Emu_list)-1)].start_temp)
-	k = k+1
+	start_temps.append(Emu_list[k].start_temp)
+	k=k+1
+print(start_temps)
 
 
 # Start the hourly loop
@@ -252,9 +248,6 @@ opt_stats = {}
 emu_stats = {}
 
 gc.collect()
-
-for Emu in Emu_list:
-	emulate_jmod(Emu.emu, Emu.meas_vars, Emu.meas_sampl, '1/1/2017 00:00:00', start)
 
 for simtime in sim_range:
 	print('%%%%%%%%% IN SIMULATION LOOP: ' + str(i) + ' %%%%%%%%%%%%%%%%%') 
@@ -338,14 +331,9 @@ for simtime in sim_range:
 	
 	start_temps = []
 	k = 0
-	l = 0
 	for bldg in bldg_list:
 		controlseq[opt_start_str][bldg] = SimAggr.opt_controlseq['ConvGain2_'+bldg].display_data()
-		if k in rand:
-			start_temps.append(Emu_list[l].start_temp)
-			l = l+1
-		else:
-			start_temps.append(Emu_list[np.random.randint(0,len(Emu_list)-1)].start_temp)
+		start_temps.append(Emu_list[k].start_temp)
 		k = k+1
 			
 	print(flags)

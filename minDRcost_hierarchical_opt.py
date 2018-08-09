@@ -295,18 +295,6 @@ if __name__ == "__main__":
 	# Initialise models
 	SimAggr.init_models(use_ukf=0, use_fmu_emu=1, use_fmu_mpc=0) # Use for initialising models
 
-	start_temps = []
-	k = 0
-	l = 0
-	for bldg in bldg_list:
-		for number in rand:
-			if k == number:
-				start_temps.append(Sim_list[l].start_temp)
-				l = l+1
-			else:
-				start_temps.append(Sim_list[np.random.randint(0,len(Sim_list))].start_temp)
-		k = k+1	
-
 		
 	# Start the hourly loop
 	i = 0
@@ -319,8 +307,16 @@ if __name__ == "__main__":
 	reftemps = []
 	
 	for Emu in Sim_list:
-		# Needed to transfer the fmu to right place, it has its own weather processor
 		emulate_jmod(Emu.emu, Emu.meas_vars, Emu.meas_sampl, '1/1/2017 00:00:00', start)
+		Emu.start_temp = Emu.emu.display_measurements('Measured').values[1][-1]-273.15
+		Emu.mpc.measurements = Emu.emu.measurements
+	
+	start_temps = []
+	k = 0
+	for bldg in bldg_list:
+		controlseq[opt_start_str][bldg] = SimAggr.opt_controlseq['ConvGain2_'+bldg].display_data()
+		start_temps.append(Emu_list[k].start_temp)
+		k = k+1
 	
 	
 	for simtime in sim_range:
