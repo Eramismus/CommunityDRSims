@@ -349,8 +349,9 @@ if __name__ == "__main__":
 			
 			j = 0
 			for bldg in bldg_list:
+				out_temp=SimAggr.weather.display_data()['weaTDryBul'].resample(meas_sampl+'S').ffill()[opt_start_str]
 				SimAggr.update_params(model_name+'.heatCapacitor.T.start',start_temps[j], units.degC)
-				SimAggr.update_params(model_name+'.heatCapacitor1.T.start',start_temps[j], units.degC)
+				SimAggr.update_params(model_name+'.heatCapacitor1.T.start',(7*start_temps[j]+out_temp)/8, units.degC)
 				j=j+1
 			store_namespace('params_'+SimAggr.building, SimAggr.parameters)
 			
@@ -388,10 +389,10 @@ if __name__ == "__main__":
 			while True:
 				try:
 					print('Optimising building ' + Sim.building)
-					
+					out_temp=Sim.weather.display_data()['weaTDryBul'].resample(meas_sampl+'S').ffill()[opt_start_str]
 					# Update parameter with measurements from the zone
 					Sim.update_params('heatCapacitor.T.start',Sim.start_temp,units.degC)	
-					Sim.update_params('heatCapacitor1.T.start',Sim.start_temp,units.degC)
+					Sim.update_params('heatCapacitor1.T.start',(7*Sim.start_temp+out_temp)/8,units.degC)
 					
 					# Optimise for next time step
 					print("%%%%%% --- Optimising --- %%%%%%")

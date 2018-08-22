@@ -145,8 +145,9 @@ if __name__ == "__main__":
 					print('Optimising building ' + Sim.building)
 				
 					# Update parameter with measurements from the zone
+					out_temp = Sim.weather.display_data()['weaTDryBul'].resample(meas_sampl+'S').ffill()[opt_start_str]
 					Sim.update_params('heatCapacitor.T.start',Sim.start_temp,units.degC)	
-					Sim.update_params('heatCapacitor1.T.start',Sim.start_temp,units.degC)
+					Sim.update_params('heatCapacitor1.T.start',(7*Sim.start_temp+out_temp)/8,units.degC)
 					
 					# Optimise for next time step
 					print("%%%%%% --- Optimising --- %%%%%%")

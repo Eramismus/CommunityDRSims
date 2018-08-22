@@ -280,8 +280,10 @@ for simtime in sim_range:
 	# Update parameters with measurements from the zone
 	j = 0
 	for bldg in bldg_list:
+		model_name = bldg+'_'+model_id
+		out_temp=SimAggr.weather.display_data()['weaTDryBul'].resample(meas_sampl+'S').ffill()[opt_start_str]
 		SimAggr.update_params(model_name+'.heatCapacitor.T.start',start_temps[j], units.degC)
-		SimAggr.update_params(model_name+'.heatCapacitor1.T.start',start_temps[j], units.degC)
+		SimAggr.update_params(model_name+'.heatCapacitor1.T.start',(7*start_temps[j]+out_temp)/8, units.degC)
 		j=j+1
 	store_namespace('params_'+SimAggr.building, SimAggr.parameters)
 	
