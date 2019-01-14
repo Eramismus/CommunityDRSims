@@ -1,0 +1,312 @@
+#1
+char Aclass(3,11)
+Atrajectory
+1.1
+
+char name(98,39)
+time
+senTemp.port.Q_flow
+C1start
+C2start
+preHeat.T_ref
+preHeat.alpha
+heatCapacitor.C
+thermalResistor.R
+heatCapacitor1.C
+thermalResistor1.R
+preHeat1.T_ref
+preHeat1.alpha
+WinA.k
+HeatPowerCoeff.k
+_block_jacobian_check_tol
+_cs_rel_tol
+_cs_step_size
+_events_default_tol
+_events_tol_factor
+_nle_jacobian_finite_difference_delta
+_nle_solver_default_tol
+_nle_solver_max_residual_scaling_factor
+_nle_solver_min_residual_scaling_factor
+_nle_solver_min_tol
+_nle_solver_regularization_tolerance
+_nle_solver_step_limit_factor
+_nle_solver_tol_factor
+_time_events_default_tol
+WinA.y
+HeatPowerCoeff.y
+product.u1
+product1.u2
+der(heatCapacitor.T)
+der(heatCapacitor1.T)
+heatCapacitor.T
+thermalResistor.port_b.T
+preHeat1.port.T
+senTemp.T
+heatCapacitor.port.T
+senTemp.port.T
+preHeat.port.T
+heatCapacitor1.T
+thermalResistor.port_a.T
+thermalResistor1.port_b.T
+heatCapacitor1.port.T
+HPPower
+weaTDryBul
+weaHGloHor
+preTemp.port.T
+thermalResistor1.port_a.T
+preTemp.T
+preHeat.Q_flow
+product1.y
+preHeat.port.Q_flow
+TAir
+heatCapacitor.der_T
+heatCapacitor.port.Q_flow
+thermalResistor.Q_flow
+thermalResistor.port_a.Q_flow
+thermalResistor.port_b.Q_flow
+thermalResistor.dT
+heatCapacitor1.der_T
+heatCapacitor1.port.Q_flow
+thermalResistor1.Q_flow
+preTemp.port.Q_flow
+thermalResistor1.port_b.Q_flow
+thermalResistor1.port_a.Q_flow
+thermalResistor1.dT
+preHeat1.Q_flow
+product.y
+preHeat1.port.Q_flow
+product.u2
+product1.u1
+_block_solver_experimental_mode
+_cs_experimental_mode
+_cs_solver
+_iteration_variable_scaling
+_log_level
+_nle_active_bounds_mode
+_nle_jacobian_calculation_mode
+_nle_jacobian_update_mode
+_nle_solver_exit_criterion
+_nle_solver_max_iter
+_nle_solver_max_iter_no_jacobian
+_residual_equation_scaling
+_block_jacobian_check
+_block_solver_profiling
+_enforce_bounds
+_nle_brent_ignore_error
+_nle_solver_check_jac_cond
+_nle_solver_use_last_integrator_step
+_nle_solver_use_nominals_as_fallback
+_rescale_after_singular_jac
+_rescale_each_step
+_runtime_log_to_file
+_use_Brent_in_1d
+_use_jacobian_equilibration
+_use_newton_for_brent
+
+char description(98,68)
+Time in [s]
+Heat flow rate (positive if flowing from outside into the component)
+start temperature
+start temperature
+Reference temperature
+Temperature coefficient of heat flow rate
+Heat capacity of element (= cp*m)
+Constant thermal resistance of material
+Heat capacity of element (= cp*m)
+Constant thermal resistance of material
+Reference temperature
+Temperature coefficient of heat flow rate
+Constant output value
+Constant output value
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Connector of Real output signal
+Connector of Real output signal
+Connector of Real input signal 1
+Connector of Real input signal 2
+
+
+Temperature of element
+Port temperature
+Port temperature
+Absolute temperature as output signal
+Port temperature
+Port temperature
+Port temperature
+Temperature of element
+Port temperature
+Port temperature
+Port temperature
+Heat input
+Ambient temperature
+Ambient temperature
+Port temperature
+Port temperature
+
+
+Connector of Real output signal
+Heat flow rate (positive if flowing from outside into the component)
+Zone temperature
+Time derivative of temperature (= der(T))
+Heat flow rate (positive if flowing from outside into the component)
+Heat flow rate from port_a -> port_b
+Heat flow rate (positive if flowing from outside into the component)
+Heat flow rate (positive if flowing from outside into the component)
+port_a.T - port_b.T
+Time derivative of temperature (= der(T))
+Heat flow rate (positive if flowing from outside into the component)
+Heat flow rate from port_a -> port_b
+Heat flow rate (positive if flowing from outside into the component)
+Heat flow rate (positive if flowing from outside into the component)
+Heat flow rate (positive if flowing from outside into the component)
+port_a.T - port_b.T
+
+Connector of Real output signal
+Heat flow rate (positive if flowing from outside into the component)
+Connector of Real input signal 2
+Connector of Real input signal 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+int dataInfo(98,4)
+0 1 0 -1 # time
+1 2 0 -1 # senTemp.port.Q_flow
+1 3 0 -1 # C1start
+1 4 0 -1 # C2start
+1 5 0 -1 # preHeat.T_ref
+1 6 0 -1 # preHeat.alpha
+1 7 0 -1 # heatCapacitor.C
+1 8 0 -1 # thermalResistor.R
+1 9 0 -1 # heatCapacitor1.C
+1 10 0 -1 # thermalResistor1.R
+1 11 0 -1 # preHeat1.T_ref
+1 12 0 -1 # preHeat1.alpha
+1 13 0 -1 # WinA.k
+1 14 0 -1 # HeatPowerCoeff.k
+1 15 0 -1 # _block_jacobian_check_tol
+1 16 0 -1 # _cs_rel_tol
+1 17 0 -1 # _cs_step_size
+1 18 0 -1 # _events_default_tol
+1 19 0 -1 # _events_tol_factor
+1 20 0 -1 # _nle_jacobian_finite_difference_delta
+1 21 0 -1 # _nle_solver_default_tol
+1 22 0 -1 # _nle_solver_max_residual_scaling_factor
+1 23 0 -1 # _nle_solver_min_residual_scaling_factor
+1 24 0 -1 # _nle_solver_min_tol
+1 25 0 -1 # _nle_solver_regularization_tolerance
+1 26 0 -1 # _nle_solver_step_limit_factor
+1 27 0 -1 # _nle_solver_tol_factor
+1 28 0 -1 # _time_events_default_tol
+1 29 0 -1 # WinA.y
+1 30 0 -1 # HeatPowerCoeff.y
+1 31 0 -1 # product.u1
+1 32 0 -1 # product1.u2
+2 2 0 -1 # der(heatCapacitor.T)
+2 3 0 -1 # der(heatCapacitor1.T)
+2 4 0 -1 # heatCapacitor.T
+2 4 0 -1 # thermalResistor.port_b.T
+2 4 0 -1 # preHeat1.port.T
+2 4 0 -1 # senTemp.T
+2 4 0 -1 # heatCapacitor.port.T
+2 4 0 -1 # senTemp.port.T
+2 4 0 -1 # preHeat.port.T
+2 5 0 -1 # heatCapacitor1.T
+2 5 0 -1 # thermalResistor.port_a.T
+2 5 0 -1 # thermalResistor1.port_b.T
+2 5 0 -1 # heatCapacitor1.port.T
+2 6 0 -1 # HPPower
+2 7 0 -1 # weaTDryBul
+2 8 0 -1 # weaHGloHor
+2 9 0 -1 # preTemp.port.T
+2 9 0 -1 # thermalResistor1.port_a.T
+2 9 0 -1 # preTemp.T
+2 10 0 -1 # preHeat.Q_flow
+2 10 0 -1 # product1.y
+2 11 0 -1 # preHeat.port.Q_flow
+2 12 0 -1 # TAir
+2 13 0 -1 # heatCapacitor.der_T
+2 14 0 -1 # heatCapacitor.port.Q_flow
+2 15 0 -1 # thermalResistor.Q_flow
+2 15 0 -1 # thermalResistor.port_a.Q_flow
+2 -15 0 -1 # thermalResistor.port_b.Q_flow
+2 16 0 -1 # thermalResistor.dT
+2 17 0 -1 # heatCapacitor1.der_T
+2 18 0 -1 # heatCapacitor1.port.Q_flow
+2 19 0 -1 # thermalResistor1.Q_flow
+2 -19 0 -1 # preTemp.port.Q_flow
+2 -19 0 -1 # thermalResistor1.port_b.Q_flow
+2 19 0 -1 # thermalResistor1.port_a.Q_flow
+2 20 0 -1 # thermalResistor1.dT
+2 21 0 -1 # preHeat1.Q_flow
+2 21 0 -1 # product.y
+2 22 0 -1 # preHeat1.port.Q_flow
+2 23 0 -1 # product.u2
+2 24 0 -1 # product1.u1
+1 33 0 -1 # _block_solver_experimental_mode
+1 34 0 -1 # _cs_experimental_mode
+1 35 0 -1 # _cs_solver
+1 36 0 -1 # _iteration_variable_scaling
+1 37 0 -1 # _log_level
+1 38 0 -1 # _nle_active_bounds_mode
+1 39 0 -1 # _nle_jacobian_calculation_mode
+1 40 0 -1 # _nle_jacobian_update_mode
+1 41 0 -1 # _nle_solver_exit_criterion
+1 42 0 -1 # _nle_solver_max_iter
+1 43 0 -1 # _nle_solver_max_iter_no_jacobian
+1 44 0 -1 # _residual_equation_scaling
+1 45 0 -1 # _block_jacobian_check
+1 46 0 -1 # _block_solver_profiling
+1 47 0 -1 # _enforce_bounds
+1 48 0 -1 # _nle_brent_ignore_error
+1 49 0 -1 # _nle_solver_check_jac_cond
+1 50 0 -1 # _nle_solver_use_last_integrator_step
+1 51 0 -1 # _nle_solver_use_nominals_as_fallback
+1 52 0 -1 # _rescale_after_singular_jac
+1 53 0 -1 # _rescale_each_step
+1 54 0 -1 # _runtime_log_to_file
+1 55 0 -1 # _use_Brent_in_1d
+1 56 0 -1 # _use_jacobian_equilibration
+1 57 0 -1 # _use_newton_for_brent
+
+float data_1(2,57)
+0.00000000000000E+00 0.00000000000000E+00 2.92259326207563E+02 2.89545660431618E+02 2.93150000000000E+02 0.00000000000000E+00 7.11733307943201E+06 2.20955756746178E-03 2.24337564020664E+08 9.99517005682508E-02 2.93150000000000E+02 0.00000000000000E+00 1.87713776750483E+00 7.50000000000000E+03 1.00000000000000E-06 1.00000000000000E-06 1.00000000000000E-03 1.00000000000000E-10 1.00000000000000E-04 1.49011611938477E-08 1.00000000000000E-10 1.00000000000000E+10 1.00000000000000E-10 1.00000000000000E-12 -1.00000000000000E+00 1.00000000000000E+01 1.00000000000000E-04 2.22044604925031E-14 1.87713776750483E+00 7.50000000000000E+03 1.87713776750483E+00 7.50000000000000E+03 0.00000000000000E+00 0.00000000000000E+00 0.00000000000000E+00 1.00000000000000E+00 3.00000000000000E+00 0.00000000000000E+00 0.00000000000000E+00 2.00000000000000E+00 3.00000000000000E+00 1.00000000000000E+02 1.00000000000000E+01 1.00000000000000E+00 0.00000000000000E+00 0.00000000000000E+00 1.00000000000000E+00 0.00000000000000E+00 0.00000000000000E+00 1.00000000000000E+00 1.00000000000000E+00 1.00000000000000E+00 0.00000000000000E+00 0.00000000000000E+00 1.00000000000000E+00 0.00000000000000E+00 1.00000000000000E+00
+3.00000000000000E+02         0.00000000000000E+00 2.92259326207563E+02 2.89545660431618E+02 2.93150000000000E+02 0.00000000000000E+00 7.11733307943201E+06 2.20955756746178E-03 2.24337564020664E+08 9.99517005682508E-02 2.93150000000000E+02 0.00000000000000E+00 1.87713776750483E+00 7.50000000000000E+03 1.00000000000000E-06 1.00000000000000E-06 1.00000000000000E-03 1.00000000000000E-10 1.00000000000000E-04 1.49011611938477E-08 1.00000000000000E-10 1.00000000000000E+10 1.00000000000000E-10 1.00000000000000E-12 -1.00000000000000E+00 1.00000000000000E+01 1.00000000000000E-04 2.22044604925031E-14 1.87713776750483E+00 7.50000000000000E+03 1.87713776750483E+00 7.50000000000000E+03 0.00000000000000E+00 0.00000000000000E+00 0.00000000000000E+00 1.00000000000000E+00 3.00000000000000E+00 0.00000000000000E+00 0.00000000000000E+00 2.00000000000000E+00 3.00000000000000E+00 1.00000000000000E+02 1.00000000000000E+01 1.00000000000000E+00 0.00000000000000E+00 0.00000000000000E+00 1.00000000000000E+00 0.00000000000000E+00 0.00000000000000E+00 1.00000000000000E+00 1.00000000000000E+00 1.00000000000000E+00 0.00000000000000E+00 0.00000000000000E+00 1.00000000000000E+00 0.00000000000000E+00 1.00000000000000E+00
+
+float data_2(2,24)                           
+ 0.00000000000000E+00 3.18750042374846E-04 4.62740399325245E-06 2.92259326207563E+02 2.89545660431618E+02 4.66239887581651E-01 2.70550000000000E+02 0.00000000000000E+00 2.70550000000000E+02 3.49679915686238E+03 -3.49679915686238E+03 2.92259326207563E+02 3.18750042374846E-04 2.26865022066485E+03 -1.22814893619754E+03 -2.71366577594540E+00 4.62740399325245E-06 1.03810053958575E+03 -1.90048396611788E+02 -1.89956604316176E+01 0.00000000000000E+00 -0.00000000000000E+00 0.00000000000000E+00 4.66239887581651E-01
+ 3.00000000000000E+02 1.64249992755728E-04 4.76741051131396E-06 2.92330905655259E+02 2.89547072412969E+02 3.23856958025217E-01 2.70516666666667E+02 0.00000000000000E+00 2.70516666666667E+02 2.42892718518912E+03 -2.42892718518912E+03 2.92330905655259E+02 1.64249992755728E-04 1.16902190673681E+03 -1.25990527845231E+03 -2.78383324228935E+00 4.76741051131396E-06 1.06950926079468E+03 -1.90396017657630E+02 -1.90304057463028E+01 0.00000000000000E+00 -0.00000000000000E+00 0.00000000000000E+00 3.23856958025217E-01

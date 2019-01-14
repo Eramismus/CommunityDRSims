@@ -1,0 +1,239 @@
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <ErrorSettingInitialGuess category="error"><value name="errorCode">-1</value> returned from <value name="block">"4"</value> when setting the initial guess.</ErrorSettingInitialGuess>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <ErrorSettingInitialGuess category="error"><value name="errorCode">-1</value> returned from <value name="block">"4"</value> when setting the initial guess.</ErrorSettingInitialGuess>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error] <Error category="error">Evaluating the derivatives failed at <value name="t">       2.5838345211451752E+002</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <ErrorSettingInitialGuess category="error"><value name="errorCode">-1</value> returned from <value name="block">"4"</value> when setting the initial guess.</ErrorSettingInitialGuess>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <ErrorSettingInitialGuess category="error"><value name="errorCode">-1</value> returned from <value name="block">"4"</value> when setting the initial guess.</ErrorSettingInitialGuess>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error] <Error category="error">Evaluating the derivatives failed at <value name="t">       2.2828169931892975E+002</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [INFO][FMU status:Error]   <KinsolError category="error">
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     Error occured in <value name="function">KINSol</value> at <value name="t">       2.2075626112003280E+002</value> when solving <value name="block">"9"</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="msg">"The line search algorithm was unable to find an iterate sufficiently distinct from the current iterate."</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="functionL2Norm">       1.6869513114943631E-009</value>, <value name="scaledStepLength">       2.5582865642665020E-015</value>, <value name="tolerance">       1.0000000000000000E-010</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   </KinsolError>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [INFO][FMU status:Error]   <KinsolError category="error">
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     Error occured in <value name="function">KINSol</value> at <value name="t">       2.2075626112003280E+002</value> when solving <value name="block">"9"</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="msg">"The line search algorithm was unable to find an iterate sufficiently distinct from the current iterate."</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="functionL2Norm">       1.6869513114943631E-009</value>, <value name="scaledStepLength">       2.5582865642665020E-015</value>, <value name="tolerance">       1.0000000000000000E-010</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   </KinsolError>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [INFO][FMU status:Error]   <KinsolError category="error">
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     Error occured in <value name="function">KINSol</value> at <value name="t">       2.1933131115920324E+002</value> when solving <value name="block">"9"</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="msg">"The line search algorithm was unable to find an iterate sufficiently distinct from the current iterate."</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="functionL2Norm">       1.0543445696844620E-010</value>, <value name="scaledStepLength">       3.1956376281154905E-016</value>, <value name="tolerance">       1.0000000000000000E-010</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   </KinsolError>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [INFO][FMU status:Error]   <KinsolError category="error">
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     Error occured in <value name="function">KINSol</value> at <value name="t">       2.2026376788753646E+002</value> when solving <value name="block">"9"</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="msg">"The line search algorithm was unable to find an iterate sufficiently distinct from the current iterate."</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="functionL2Norm">       4.2173782787352610E-010</value>, <value name="scaledStepLength">       4.5943711955023213E-017</value>, <value name="tolerance">       1.0000000000000000E-010</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   </KinsolError>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [INFO][FMU status:Error]   <KinsolError category="error">
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     Error occured in <value name="function">KINSol</value> at <value name="t">       2.1926942543983120E+002</value> when solving <value name="block">"9"</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="msg">"The line search algorithm was unable to find an iterate sufficiently distinct from the current iterate."</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="functionL2Norm">       1.0543445696838152E-010</value>, <value name="scaledStepLength">       1.9985574554692679E-017</value>, <value name="tolerance">       1.0000000000000000E-010</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   </KinsolError>
+FMIL: module = Model, log level = 2: [INFO][FMU status:Error]   <KinsolError category="error">
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     Error occured in <value name="function">KINSol</value> at <value name="t">       2.1926941868232362E+002</value> when solving <value name="block">"9"</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="msg">"The line search algorithm was unable to find an iterate sufficiently distinct from the current iterate."</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="functionL2Norm">       1.0543445696844620E-010</value>, <value name="scaledStepLength">       3.1957409587127580E-016</value>, <value name="tolerance">       1.0000000000000000E-010</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   </KinsolError>
+FMIL: module = Model, log level = 2: [INFO][FMU status:Error]   <KinsolError category="error">
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     Error occured in <value name="function">KINSol</value> at <value name="t">       2.1926931739299738E+002</value> when solving <value name="block">"9"</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="msg">"The line search algorithm was unable to find an iterate sufficiently distinct from the current iterate."</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="functionL2Norm">       1.0543445696844620E-010</value>, <value name="scaledStepLength">       3.1957409329057311E-016</value>, <value name="tolerance">       1.0000000000000000E-010</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   </KinsolError>
+FMIL: module = Model, log level = 2: [INFO][FMU status:Error]   <KinsolError category="error">
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     Error occured in <value name="function">KINSol</value> at <value name="t">       2.1926856544166213E+002</value> when solving <value name="block">"9"</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="msg">"The line search algorithm was unable to find an iterate sufficiently distinct from the current iterate."</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="functionL2Norm">       1.0543445696844620E-010</value>, <value name="scaledStepLength">       3.1957409799655751E-016</value>, <value name="tolerance">       1.0000000000000000E-010</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   </KinsolError>
+FMIL: module = Model, log level = 2: [INFO][FMU status:Error]   <KinsolError category="error">
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     Error occured in <value name="function">KINSol</value> at <value name="t">       2.1925681623390591E+002</value> when solving <value name="block">"9"</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="msg">"The line search algorithm was unable to find an iterate sufficiently distinct from the current iterate."</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="functionL2Norm">       1.0543445696844620E-010</value>, <value name="scaledStepLength">       3.1957421475403368E-016</value>, <value name="tolerance">       1.0000000000000000E-010</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   </KinsolError>
+FMIL: module = Model, log level = 2: [INFO][FMU status:Error]   <KinsolError category="error">
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     Error occured in <value name="function">KINSol</value> at <value name="t">       2.1918460600841479E+002</value> when solving <value name="block">"9"</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="msg">"The line search algorithm was unable to find an iterate sufficiently distinct from the current iterate."</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="functionL2Norm">       1.0543445696844620E-010</value>, <value name="scaledStepLength">       3.1957849655334126E-016</value>, <value name="tolerance">       1.0000000000000000E-010</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   </KinsolError>
+FMIL: module = Model, log level = 2: [INFO][FMU status:Error]   <KinsolError category="error">
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     Error occured in <value name="function">KINSol</value> at <value name="t">       2.1917871968833165E+002</value> when solving <value name="block">"9"</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="msg">"The line search algorithm was unable to find an iterate sufficiently distinct from the current iterate."</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="functionL2Norm">       1.0543445696864022E-010</value>, <value name="scaledStepLength">       6.3889834226080119E-016</value>, <value name="tolerance">       1.0000000000000000E-010</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   </KinsolError>
+FMIL: module = Model, log level = 2: [INFO][FMU status:Error]   <KinsolError category="error">
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     Error occured in <value name="function">KINSol</value> at <value name="t">       2.1917871938680869E+002</value> when solving <value name="block">"9"</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="msg">"The line search algorithm was unable to find an iterate sufficiently distinct from the current iterate."</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="functionL2Norm">       1.0543445696844620E-010</value>, <value name="scaledStepLength">       3.1957906373110173E-016</value>, <value name="tolerance">       1.0000000000000000E-010</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   </KinsolError>
+FMIL: module = Model, log level = 2: [INFO][FMU status:Error]   <KinsolError category="error">
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     Error occured in <value name="function">KINSol</value> at <value name="t">       2.1917871487274076E+002</value> when solving <value name="block">"9"</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="msg">"The line search algorithm was unable to find an iterate sufficiently distinct from the current iterate."</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="functionL2Norm">       1.0543445696844620E-010</value>, <value name="scaledStepLength">       3.1957906329022147E-016</value>, <value name="tolerance">       1.0000000000000000E-010</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   </KinsolError>
+FMIL: module = Model, log level = 2: [INFO][FMU status:Error]   <KinsolError category="error">
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     Error occured in <value name="function">KINSol</value> at <value name="t">       2.1917871007579993E+002</value> when solving <value name="block">"9"</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="msg">"The line search algorithm was unable to find an iterate sufficiently distinct from the current iterate."</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="functionL2Norm">       1.0543445696844620E-010</value>, <value name="scaledStepLength">       3.1957906402959457E-016</value>, <value name="tolerance">       1.0000000000000000E-010</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   </KinsolError>
+FMIL: module = Model, log level = 2: [INFO][FMU status:Error]   <KinsolError category="error">
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     Error occured in <value name="function">KINSol</value> at <value name="t">       2.1917870053744431E+002</value> when solving <value name="block">"9"</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="msg">"The line search algorithm was unable to find an iterate sufficiently distinct from the current iterate."</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="functionL2Norm">       1.0543445696844620E-010</value>, <value name="scaledStepLength">       3.1957906675258804E-016</value>, <value name="tolerance">       1.0000000000000000E-010</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   </KinsolError>
+FMIL: module = Model, log level = 2: [INFO][FMU status:Error]   <KinsolError category="error">
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     Error occured in <value name="function">KINSol</value> at <value name="t">       2.1917868167984957E+002</value> when solving <value name="block">"9"</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="msg">"The line search algorithm was unable to find an iterate sufficiently distinct from the current iterate."</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="functionL2Norm">       1.0543445696864022E-010</value>, <value name="scaledStepLength">       6.3889833008330025E-016</value>, <value name="tolerance">       1.0000000000000000E-010</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   </KinsolError>
+FMIL: module = Model, log level = 2: [INFO][FMU status:Error]   <KinsolError category="error">
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     Error occured in <value name="function">KINSol</value> at <value name="t">       2.1917857433312469E+002</value> when solving <value name="block">"9"</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="msg">"The line search algorithm was unable to find an iterate sufficiently distinct from the current iterate."</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="functionL2Norm">       1.0543445696844620E-010</value>, <value name="scaledStepLength">       3.1957907619425483E-016</value>, <value name="tolerance">       1.0000000000000000E-010</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   </KinsolError>
+FMIL: module = Model, log level = 2: [INFO][FMU status:Error]   <KinsolError category="error">
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     Error occured in <value name="function">KINSol</value> at <value name="t">       2.1917844506516363E+002</value> when solving <value name="block">"9"</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="msg">"The line search algorithm was unable to find an iterate sufficiently distinct from the current iterate."</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="functionL2Norm">       1.0543445696844620E-010</value>, <value name="scaledStepLength">       3.2100823765640073E-016</value>, <value name="tolerance">       1.0000000000000000E-010</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   </KinsolError>
+FMIL: module = Model, log level = 2: [INFO][FMU status:Error]   <KinsolError category="error">
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     Error occured in <value name="function">KINSol</value> at <value name="t">       2.1917822518181100E+002</value> when solving <value name="block">"9"</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="msg">"The line search algorithm was unable to find an iterate sufficiently distinct from the current iterate."</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="functionL2Norm">       1.0543445696844620E-010</value>, <value name="scaledStepLength">       3.1957911237792429E-016</value>, <value name="tolerance">       1.0000000000000000E-010</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   </KinsolError>
+FMIL: module = Model, log level = 2: [INFO][FMU status:Error]   <KinsolError category="error">
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     Error occured in <value name="function">KINSol</value> at <value name="t">       2.2391474162345162E+002</value> when solving <value name="block">"9"</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="msg">"The line search algorithm was unable to find an iterate sufficiently distinct from the current iterate."</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="functionL2Norm">       2.1086891393689240E-010</value>, <value name="scaledStepLength">       4.9877503953999035E-016</value>, <value name="tolerance">       1.0000000000000000E-010</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   </KinsolError>
+FMIL: module = Model, log level = 2: [INFO][FMU status:Error]   <KinsolError category="error">
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     Error occured in <value name="function">KINSol</value> at <value name="t">       2.2391474162345162E+002</value> when solving <value name="block">"9"</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="msg">"The line search algorithm was unable to find an iterate sufficiently distinct from the current iterate."</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="functionL2Norm">       2.1086891393689240E-010</value>, <value name="scaledStepLength">       4.9877503953999035E-016</value>, <value name="tolerance">       1.0000000000000000E-010</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   </KinsolError>
+FMIL: module = Model, log level = 2: [INFO][FMU status:Error]   <KinsolError category="error">
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     Error occured in <value name="function">KINSol</value> at <value name="t">       2.2391474162345162E+002</value> when solving <value name="block">"9"</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="msg">"The line search algorithm was unable to find an iterate sufficiently distinct from the current iterate."</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]     <value name="functionL2Norm">       2.1086891393689240E-010</value>, <value name="scaledStepLength">       4.9877504260753012E-016</value>, <value name="tolerance">       1.0000000000000000E-010</value>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   </KinsolError>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <Error category="error">Residual function evaluation failed during Newton for block <value name="block">"4"</value></Error>
