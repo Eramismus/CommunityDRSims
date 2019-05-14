@@ -23,7 +23,7 @@ To save space only results for January are in the folder.
 
 Final note: the code is poorly commented and it is currently in as it was written "on the fly". For any questions, just contact the author, Eramismus.
 
-#Thesis
+# Thesis
 
 Simulator.py contains python functions for running different types of simulations.
 
