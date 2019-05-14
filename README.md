@@ -1,4 +1,4 @@
-#IBPSA paper
+# IBPSA paper
 
 Simulator_HP_mod2.py and Simulator_HP_mod3.py contains python functions for running different types of simulations and to initialise the models from the fmus or mo-files.
 
@@ -20,6 +20,8 @@ Analysis is done in two phases:
 2. Analyse all cases together and generate plots and csvs for communication with analyser_drcases.py and analyser_ref.py
 
 To save space only results for January are in the folder.
+
+Final note: the code is poorly commented and it is currently in as it was written "on the fly". For any questions, just contact the author, Eramismus.
 
 #Thesis
 
