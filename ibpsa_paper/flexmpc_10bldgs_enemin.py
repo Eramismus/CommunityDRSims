@@ -21,8 +21,8 @@ if __name__ == "__main__":
     community = 'ResidentialCommunityUK_rad_2elements'
     sim_id = 'MinEne'
     model_id = 'R2CW_HP'
-    bldg_list = load_namespace(os.path.join('path_to_model', 'teaser_bldgs_residentialUK_10bldgs_fallback'))
-    folder = '\\results'
+    bldg_list = load_namespace(os.path.join('path_to_models', 'teaser_bldgs_residentialUK_10bldgs_fallback'))
+    folder = 'results'
     bldg_index_start = 0
     bldg_index_end = 10
     mon = 'mar'
@@ -92,7 +92,7 @@ if __name__ == "__main__":
         if i == 1:
             Sim.update_weather(init_start_str, opt_end_str)
             Sim.get_DRinfo(init_start_str,opt_end_str)
-            Sim.price = load_namespace(os.path.join(Sim.simu_path, 'IBPSAPaper', 'prices', 'sim_price_'+mon))
+            Sim.price = load_namespace(os.path.join(Sim.simu_path, 'ibpsa_paper', 'prices', 'sim_price_'+mon))
             index = pd.date_range(start, opt_end_str, freq = meas_sampl+'S', tz=Sim.weather.tz_name)
             if dyn_price == 0:
                 price_signal = pd.Series(stat_cost, index)
@@ -118,8 +118,7 @@ if __name__ == "__main__":
         Sim.get_params()
         
         Sim.parameters.data = load_namespace(os.path.join(Sim.simu_path, 'sysid', 'sysid_HPrad_2element_'+mon+'_600S','est_params_'+Sim.building))
-        Sim.other_input = load_namespace(os.path.join(Sim.simu_path, 'IBPSAPaper', 'decentr_enemin_'+mon, 'other_input_'+Sim.building))
-        Sim.constraints = load_namespace(os.path.join(Sim.simu_path, 'IBPSAPaper', 'decentr_enemin_'+mon, 'constraints_'+Sim.building))
+        
         
         store_namespace('constraints_'+Sim.building, Sim.constraints)
         store_namespace('other_input_'+Sim.building, Sim.other_input)
@@ -143,7 +142,7 @@ if __name__ == "__main__":
     
     index = pd.date_range(start, opt_end_str, freq = meas_sampl+'S')
     flex_cost_signal = pd.Series(0,index)
-
+    
     for Sim in Sim_list:
         
         while True:
@@ -203,7 +202,6 @@ if __name__ == "__main__":
                     Sim.update_params('C1start',Sim.start_temp+273.15,units.K)  
                     Sim.update_params('C2start',(7*Sim.start_temp+out_temp)/8+273.15,units.K)
                     
-                
                     # Optimise for next time step
                     print("%%%%%% --- Optimising --- %%%%%%")
                     Sim.opt_start = opt_start_str
@@ -244,7 +242,6 @@ if __name__ == "__main__":
                         print('%%%%%%%%%%%%%%% Load-tracking %%%%%%%%%%%%%%%%%%%%%')
                     else:
                         print('%%%%%%%%%%%%%%% No load_tracking %%%%%%%%%%%%%%%%%%%%%')
-                        
                     Sim.opt_control_minDRCost()
                     load_profile = Sim.opt_controlseq['HPPower'].display_data()
                     
@@ -271,7 +268,7 @@ if __name__ == "__main__":
                     Sim.start_temp = Sim.emu.display_measurements('Measured').values[1][-1]-273.15
                     
                     controlseq[Sim.building] = Sim.opt_controlseq['HPPower'].display_data()
-
+                    
                     print("%%%%%%%%%%% Control Sequence %%%%%%%%%")
                     print(Sim.opt_controlseq['HPPower'].display_data()[simtime:])
                     

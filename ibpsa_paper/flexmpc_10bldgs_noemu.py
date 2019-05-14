@@ -21,18 +21,18 @@ if __name__ == "__main__":
     community = 'ResidentialCommunityUK_rad_2elements'
     sim_id = 'MinEne'
     model_id = 'R2CW_HP'
-    bldg_list = load_namespace(os.path.join('path_to_model', 'teaser_bldgs_residentialUK_10bldgs_fallback'))
-    folder = '\\results'
+    bldg_list = load_namespace(os.path.join('path_to_models', 'teaser_bldgs_residentialUK_10bldgs_fallback'))
+    folder = 'results'
     bldg_index_start = 0
     bldg_index_end = 10
     
     # Overall options
-    date = '1/7/2017 '
+    date = '11/20/2017 '
     start = date + '16:30:00'
     end = date + '19:00:00'
     meas_sampl = '300'
     horizon = 2*3600/float(meas_sampl) #time horizon for optimization in multiples of the sample
-    mon = 'jan'
+    mon = 'nov'
     
     DRstart = datetime.datetime.strptime(date + '17:30:00', '%m/%d/%Y %H:%M:%S') # hour to start DR - ramp down 30 mins before
     DRend = datetime.datetime.strptime(date + '18:30:00', '%m/%d/%Y %H:%M:%S') # hour to end DR - ramp 30 mins later
@@ -40,6 +40,9 @@ if __name__ == "__main__":
     DR_ramp_start = datetime.datetime.strptime(date + '17:30:00', '%m/%d/%Y %H:%M:%S')
     DR_ramp_end = datetime.datetime.strptime(date + '18:30:00', '%m/%d/%Y %H:%M:%S') # Round of loop to stop implementing the call
     flex_cost = 150 # Cost for flexibility
+    
+    #down_weight = 0.5 # weights to define the reference profile from upper and lower limit
+    #up_weight = 1-down_weight
     
     compr_capacity=float(3000)
     
@@ -55,7 +58,7 @@ if __name__ == "__main__":
     opt_end = datetime.datetime.strptime(end, '%m/%d/%Y %H:%M:%S') + datetime.timedelta(seconds = horizon*int(meas_sampl))
     opt_end_str = opt_end.strftime('%m/%d/%Y %H:%M:%S')
     
-    init_start = sim_range[0] - datetime.timedelta(seconds = 0.5*3600)
+    init_start = sim_range[0] - datetime.timedelta(seconds = 4.5*3600)
     init_start_str = init_start.strftime('%m/%d/%Y %H:%M:%S')
     print(init_start_str)
 
@@ -122,7 +125,7 @@ if __name__ == "__main__":
         if i == 1:
             Sim.update_weather(init_start_str, opt_end_str)
             Sim.get_DRinfo(init_start_str,opt_end_str)
-            Sim.price = load_namespace(os.path.join(Sim.simu_path, 'IBPSAPaper', 'prices', 'sim_price_'+mon))
+            Sim.price = load_namespace(os.path.join(Sim.simu_path, 'ibpsa_paper', 'prices', 'sim_price_'+mon))
             index = pd.date_range(start, opt_end_str, freq = meas_sampl+'S', tz=Sim.weather.tz_name)
             if dyn_price == 0:
                 price_signal = pd.Series(stat_cost, index)
@@ -137,7 +140,9 @@ if __name__ == "__main__":
             Sim.rho = Sim_list[i-2].rho
             Sim.addobj = Sim_list[i-2].addobj
         
+        #Sim.sim_start= '1/1/2017 00:00'
         Sim.get_control()
+        #Sim.sim_start= start
         Sim.get_other_input(init_start_str,opt_end_str)
         Sim.get_constraints(init_start_str,opt_end_str,upd_control=1)
         
@@ -146,13 +151,13 @@ if __name__ == "__main__":
         Sim.get_params()
         
         if dyn_price == 0:
-            Sim.control = load_namespace(os.path.join(Sim.simu_path, 'IBPSAPaper', '10bldgs_decentr_'+'nodyn_'+mon, 'control_'+bldg+'_'+model_id))
+            Sim.control = load_namespace(os.path.join(Sim.simu_path, 'ibpsa_paper', '10bldgs_decentr_'+'nodyn_'+mon, 'control_'+bldg+'_'+model_id))
         else:
-            Sim.control = load_namespace(os.path.join(Sim.simu_path, 'IBPSAPaper', '10bldgs_decentr_'+'dyn_'+mon, 'control_'+bldg+'_'+model_id))
+            Sim.control = load_namespace(os.path.join(Sim.simu_path, 'ibpsa_paper', '10bldgs_decentr_'+'dyn_'+mon, 'control_'+bldg+'_'+model_id))
         
         Sim.parameters.data = load_namespace(os.path.join(Sim.simu_path, 'sysid', 'sysid_HPrad_2element_'+mon+'_600S','est_params_'+Sim.building))
-        Sim.other_input = load_namespace(os.path.join(Sim.simu_path, 'IBPSAPaper', 'decentr_enemin_'+mon, 'other_input_'+Sim.building))
-        Sim.constraints = load_namespace(os.path.join(Sim.simu_path, 'IBPSAPaper', 'decentr_enemin_'+mon, 'constraints_'+Sim.building))
+        Sim.other_input = load_namespace(os.path.join(Sim.simu_path, 'ibpsa_paper', 'decentr_enemin_'+mon, 'other_input_'+Sim.building))
+        Sim.constraints = load_namespace(os.path.join(Sim.simu_path, 'ibpsa_paper', 'decentr_enemin_'+mon, 'constraints_'+Sim.building))
             
         # Add to list of simulations
         Sim_list.append(Sim)
@@ -265,18 +270,14 @@ if __name__ == "__main__":
                         load_profile = Sim.opt_controlseq['HPPower'].display_data()
                         flex_cost_signal = pd.Series(0,index=index)
                         
-                        #Shape the profile if required
+                         #Shape the profile if required
                         for t in load_profile.index:
                             t = t.replace(tzinfo = None)
-                            if t >= DRstart and t <= DRend:
+                            if t >= DRstart and t < DRend:
+                                print(load_profile[t])
                                 load_profile[t] = load_profile[t]-max_modifier
+                                print(load_profile[t])
                                 flex_cost_signal[t] = flex_cost 
-                            if t <= DRstart and t >= DR_ramp_start:
-                                flex_cost_signal[t] = flex_cost
-                                load_profile[t] = load_profile[t]-ramp_modifier
-                            if t >= DRend and t <= DR_ramp_end:
-                                load_profile[t] = load_profile[t]-ramp_modifier
-                                flex_cost_signal[t] = flex_cost
                             if load_profile[t] < 0:
                                 load_profile[t] = 0
                                 
@@ -305,6 +306,8 @@ if __name__ == "__main__":
                     print(Sim.mpc.display_measurements('Simulated'))
                     opt_stats[Sim.building] = Sim.opt_problem.get_optimization_statistics()
                     
+                    print("Emulating response")
+                    #Update control and emulate effects
                     Sim.control.data = Sim.opt_controlseq
                     Sim.mpc.control_data = Sim.opt_controlseq
                     
@@ -317,7 +320,7 @@ if __name__ == "__main__":
                     print(Sim.start_temp)
                     print(wall_temp[Sim.building])
                     controlseq[Sim.building] = Sim.opt_controlseq['HPPower'].display_data()
-                    
+
                     print("%%%%%%%%%%% Control Sequence %%%%%%%%%")
                     print(Sim.opt_controlseq['HPPower'].display_data()[simtime:])
 

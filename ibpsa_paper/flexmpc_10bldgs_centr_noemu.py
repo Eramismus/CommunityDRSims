@@ -22,7 +22,7 @@ if __name__ == "__main__":
     sim_id = 'MinEne'
     model_id = 'R2CW_HP'
     bldg_list = load_namespace(os.path.join('path_to_models', 'teaser_bldgs_residentialUK_10bldgs_fallback'))
-    folder = '\\results'
+    folder = 'results'
     bldg_index_start = 0
     bldg_index_end = 10
     
@@ -40,9 +40,7 @@ if __name__ == "__main__":
     DR_ramp_start = datetime.datetime.strptime(date + '17:30:00', '%m/%d/%Y %H:%M:%S')
     DR_ramp_end = datetime.datetime.strptime(date + '18:30:00', '%m/%d/%Y %H:%M:%S') # Round of loop to stop implementing the call
     flex_cost = 150 # Cost for flexibility
-    
-    #down_weight = 0.5 # weights to define the reference profile from upper and lower limit
-    #up_weight = 1-down_weight
+
     compr_capacity=float(3000)
     
     ramp_modifier = float(2000/compr_capacity) # to further modify the load profile
@@ -50,7 +48,6 @@ if __name__ == "__main__":
     
     dyn_price = 1
     stat_cost = 50
-    #set_change = 1
     
     sim_range = pd.date_range(start, end, freq = meas_sampl+'S')
     opt_start_str = start
@@ -91,9 +88,9 @@ if __name__ == "__main__":
 
     # Initialise aggregated model
     # Control
-    bldg_control = load_namespace(os.path.join(SimAggr.simu_path, 'IBPSAPaper', '10bldgs_decentr_nodyn_jan', 'control_SemiDetached_2_R2CW_HP'))
+    bldg_control = load_namespace(os.path.join(SimAggr.simu_path, 'ibpsa_paper', '10bldgs_decentr_nodyn_jan', 'control_SemiDetached_2_R2CW_HP'))
     # Constraints
-    bldg_constraints = load_namespace(os.path.join(SimAggr.simu_path, 'IBPSAPaper', '10bldgs_decentr_nodyn_jan', 'constraints_SemiDetached_2_R2CW_HP'))
+    bldg_constraints = load_namespace(os.path.join(SimAggr.simu_path, 'ibpsa_paper', '10bldgs_decentr_nodyn_jan', 'constraints_SemiDetached_2_R2CW_HP'))
 
     # Optimisation constraints variable map
     SimAggr.optcon_varmap = {}
@@ -146,8 +143,8 @@ if __name__ == "__main__":
     for bldg in bldg_list:
         #Parameters from system id
         bldg_params = load_namespace(os.path.join(SimAggr.simu_path, 'sysid', 'sysid_HPrad_2element_'+mon+'_600S','est_params_'+bldg+'_'+model_id))
-        bldg_other_input = load_namespace(os.path.join(SimAggr.simu_path, 'IBPSAPaper', 'decentr_enemin_'+mon, 'other_input_'+bldg+'_'+model_id))
-        bldg_constraints = load_namespace(os.path.join(SimAggr.simu_path, 'IBPSAPaper', 'decentr_enemin_'+mon, 'constraints_'+bldg+'_'+model_id))
+        bldg_other_input = load_namespace(os.path.join(SimAggr.simu_path, 'ibpsa_paper', 'decentr_enemin_'+mon, 'other_input_'+bldg+'_'+model_id))
+        bldg_constraints = load_namespace(os.path.join(SimAggr.simu_path, 'ibpsa_paper', 'decentr_enemin_'+mon, 'constraints_'+bldg+'_'+model_id))
         
         model_name = bldg+'_'+model_id+'_test'
         
@@ -155,7 +152,7 @@ if __name__ == "__main__":
         pheat_max = pd.Series(1,index=index)
         bldg_constraints.data['HPPower']= {'GTE': variables.Timeseries('HPPower_GTE', pheat_min, units.W, tz_name=SimAggr.weather.tz_name), 
                     'LTE': variables.Timeseries('HPPower_LTE', pheat_max, units.W,tz_name=SimAggr.weather.tz_name)}
-        
+
         for key in bldg_params:
             
             SimAggr.parameters.data[model_name+'.'+key] = {'Free': variables.Static('FreeOrNot', bldg_params[key]['Free'].data, units.boolean), 
@@ -169,9 +166,9 @@ if __name__ == "__main__":
             SimAggr.update_params(model_name+'.heatCapacitor1.T.start',SimAggr.start_temp, unit=units.degC)
         
         if dyn_price == 0:
-            bldg_control = load_namespace(os.path.join(SimAggr.simu_path, 'IBPSAPaper', '10bldgs_decentr_'+'nodyn_'+mon, 'control_'+bldg+'_'+model_id))
+            bldg_control = load_namespace(os.path.join(SimAggr.simu_path, 'ibpsa_paper', '10bldgs_decentr_'+'nodyn_'+mon, 'control_'+bldg+'_'+model_id))
         else:
-            bldg_control = load_namespace(os.path.join(SimAggr.simu_path, 'IBPSAPaper', '10bldgs_decentr_'+'dyn_'+mon, 'control_'+bldg+'_'+model_id))
+            bldg_control = load_namespace(os.path.join(SimAggr.simu_path, 'ibpsa_paper', '10bldgs_decentr_'+'dyn_'+mon, 'control_'+bldg+'_'+model_id))
             
         for key in bldg_control.data:
             SimAggr.control.data[key+'_'+bldg] = variables.Timeseries(
@@ -180,7 +177,6 @@ if __name__ == "__main__":
                 display_unit = bldg_control.data[key].get_display_unit(),
                 tz_name = SimAggr.weather.tz_name
                 )
-        
         
         for key in bldg_constraints.data:
             if key == 'HPPower':
@@ -226,7 +222,7 @@ if __name__ == "__main__":
     
     
     index = pd.date_range(init_start_str, opt_end_str, freq = meas_sampl+'S')
-    SimAggr.price = load_namespace(os.path.join('\\prices','sim_price_'+mon))
+    SimAggr.price = load_namespace(os.path.join('prices','sim_price_'+mon))
 
     if dyn_price == 0:
         index = pd.date_range(init_start_str, opt_end_str, freq = '1800S')
@@ -235,7 +231,8 @@ if __name__ == "__main__":
         }
     
     store_namespace(os.path.join(folder, 'sim_price'), SimAggr.price)
-
+        
+    #print(SimAggr.meas_varmap)
     store_namespace(os.path.join(folder, 'params_'+SimAggr.building), SimAggr.parameters)
     store_namespace(os.path.join(folder, 'control_'+SimAggr.building), SimAggr.control)
     store_namespace(os.path.join(folder, 'constraints_'+SimAggr.building), SimAggr.constraints)
@@ -293,13 +290,15 @@ if __name__ == "__main__":
             Sim.flex_cost = SimAggr.flex_cost
             Sim.price = SimAggr.price
             Sim.rho = SimAggr.rho
+            #Sim.addobj = SimAggr.addobj
         else:
             Sim.weather = Emu_list[i-2].weather
             Sim.flex_cost = Emu_list[i-2].flex_cost
             Sim.price = Emu_list[i-2].price
             Sim.rho = Emu_list[i-2].rho
             Sim.addobj = Emu_list[i-2].addobj
-
+        
+        #Sim.sim_start= '1/1/2017 00:00'
         Sim.get_control()
         Sim.get_other_input(init_start_str,opt_end_str)
         Sim.get_constraints(init_start_str,opt_end_str,upd_control=1)
@@ -308,8 +307,8 @@ if __name__ == "__main__":
         Sim.get_params()
         
         Sim.parameters.data = load_namespace(os.path.join(Sim.simu_path, 'sysid', 'sysid_HPrad_2element_'+mon+'_600S','est_params_'+Sim.building))
-        Sim.other_input = load_namespace(os.path.join(Sim.simu_path, 'IBPSAPaper', 'decentr_enemin_'+mon, 'other_input_'+Sim.building))
-        Sim.constraints = load_namespace(os.path.join(Sim.simu_path, 'IBPSAPaper', 'decentr_enemin_'+mon, 'constraints_'+Sim.building))
+        Sim.other_input = load_namespace(os.path.join(Sim.simu_path, 'ibpsa_paper', 'decentr_enemin_'+mon, 'other_input_'+Sim.building))
+        Sim.constraints = load_namespace(os.path.join(Sim.simu_path, 'ibpsa_paper', 'decentr_enemin_'+mon, 'constraints_'+Sim.building))
         
         # Add to list of simulations
         Emu_list.append(Sim)
@@ -327,7 +326,7 @@ if __name__ == "__main__":
 
     index = pd.date_range(start, opt_end_str, freq = meas_sampl+'S')
     flex_cost_signal = pd.Series(0,index=index)
-    
+
     start_temps = []
     start_temp = {}
     wall_temp = {}
@@ -366,6 +365,7 @@ if __name__ == "__main__":
         i = i + 1
         print('%%%%%%%%% IN LOOP: ' + str(i) + ' %%%%%%%%%%%%%%%%%') 
         if i == 1:
+            #simtime_str = simtime.strftime('%m/%d/%Y %H:%M:%S')
             simtime_str = 'continue'
         else:
             simtime_str = 'continue'
@@ -411,20 +411,16 @@ if __name__ == "__main__":
                     
                     load_profile_aggr  = load_profiles.sum(axis=1)
                     
-                    #Shape the profile if required
-                    for t in load_profile_aggr.index:
+                     #Shape the profile if required
+                    for t in load_profile.index:
                         t = t.replace(tzinfo = None)
-                        if t >= DRstart and t <= DRend:
-                            load_profile_aggr[t] = load_profile_aggr[t]-max_modifier
+                        if t >= DRstart and t < DRend:
+                            print(load_profile[t])
+                            load_profile[t] = load_profile[t]-max_modifier
+                            print(load_profile[t])
                             flex_cost_signal[t] = flex_cost 
-                        if t <= DRstart and t >= DR_ramp_start:
-                            flex_cost_signal[t] = flex_cost
-                            load_profile_aggr[t] = load_profile_aggr[t]-ramp_modifier
-                        if t >= DRend and t <= DR_ramp_end:
-                            load_profile_aggr[t] = load_profile_aggr[t]-ramp_modifier
-                            flex_cost_signal[t] = flex_cost
-                        if load_profile_aggr[t] < 0:
-                            load_profile_aggr[t] = 0
+                        if load_profile[t] < 0:
+                            load_profile[t] = 0
                     
                     SimAggr.flex_cost.data = {"flex_cost": variables.Timeseries('flex_cost', flex_cost_signal, units.cents_kWh,tz_name=Sim.weather.tz_name)}
                     
