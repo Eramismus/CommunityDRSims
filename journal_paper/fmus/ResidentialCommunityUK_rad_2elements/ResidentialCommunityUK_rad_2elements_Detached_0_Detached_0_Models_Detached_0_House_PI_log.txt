@@ -1,0 +1,3 @@
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <InitalEvaluation category="error">Residual function evaluation failed at initial point for <value name="block">"2"</value></InitalEvaluation>
+FMIL: module = Model, log level = 2: [ERROR][FMU status:Error]   <InitalEvaluation category="error">Jacobian evaluation failed at initial point for <value name="block">"2"</value></InitalEvaluation>
+FMIL: module = Model, log level = 2: [INFO][FMU status:Error] Initialization failed.
