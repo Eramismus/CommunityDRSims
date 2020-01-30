@@ -14,17 +14,16 @@ from matplotlib.font_manager import FontProperties
 from matplotlib import rc
 
 community = 'ResidentialCommunity'
-sim_ids = ['MinEne_0-30']
+sim_ids = ['MinEne_0-2']
 model_id = 'R2CW_HP'
-bldg_list = load_namespace(os.path.join(''file_path_to_folder'', 'teaser_bldgs_residential'))
-#bldg_list = [bldg_list[0]]
-compr_capacity_list = [float(4500.0)]*10+[float(3000.0)]*20
-tot_cap = sum(compr_capacity_list)
+bldg_list = load_namespace(os.path.join('path to models', 'teaser_bldgs_residential'))
+#
+bldg_list = [bldg_list[0], bldg_list[1]]
 print(bldg_list)
 folder = 'results'
 step = 300
 nodynprice=0
-mon = 'nov'
+mon = 'jan'
 constr_folder = 'decentr_enemin_constr_'+mon
 #bldg_list = bldg_list[0:1]
 if mon == 'jan':
@@ -37,12 +36,12 @@ elif mon == 'mar':
     controlseq_time = '03/01/2017 16:55:00'
 elif mon=='nov':
     start = '11/20/2017 16:30:00'
-    end = '11/20/2017 19:30:00'
+    end = '11/20/2017 19:00:00'
     controlseq_time = '11/20/2017 16:55:00'
 
 sim_range = pd.date_range(start, end, freq = str(step)+'S')
 
-simu_path = "'file_path_to_folder'"
+simu_path = "path to simulation folder"
 
 other_input = {}
 price = {}
@@ -57,17 +56,10 @@ flex_down = {}
 flex_up = {}
 power = {}
 
-i = 0            
+            
 for bldg in bldg_list:
 
     building = bldg+'_'+model_id
-    
-    flex_cost[building] = load_namespace(os.path.join(simu_path, folder, 'flex_cost_AggrMPC')).data['flex_cost'].get_base_data()
-    flex_cost[building] = flex_cost[building].resample(str(step)+'S').mean().shift(-1, freq=str(step) + 'S')
-    
-    ref_profile[building] = load_namespace(os.path.join("'file_path_to_folder'", folder,'ref_profile_AggrMPC')).data['ref_profile'].get_base_data()*tot_cap
-    i += 1
-
 
 
 for sim_id in sim_ids:
@@ -85,11 +77,13 @@ for sim_id in sim_ids:
 
         emutemps[sim_id][time_idx] = load_namespace(os.path.join(simu_path, folder, 'emutemps_'+sim_id+'_'+t))
 
-        mpctemps[sim_id][time_idx] = load_namespace(os.path.join(simu_path, folder, 'mpctemps_'+sim_id+'_'+t))[bldg_list[0]+'_'+model_id]
+        mpctemps[sim_id][time_idx] = load_namespace(os.path.join(simu_path, folder, 'mpctemps_'+sim_id+'_'+t))
 
         controlseq[sim_id][time_idx] = load_namespace(os.path.join(simu_path, folder, 'controlseq_'+sim_id)+'_'+t)
         power[sim_id][time_idx] = load_namespace(os.path.join(simu_path, folder, 'power_'+sim_id)+'_'+t)
-
+    #flex_down[sim_id] = load_namespace(os.path.join(simu_path, folder, 'flex_down'+sim_id))
+    #flex_up[sim_id] = load_namespace(os.path.join(simu_path, folder, 'flex_up'+sim_id))
+    
 i=0
 for sim_id in sim_ids:
     if i == 0:
@@ -98,11 +92,11 @@ for sim_id in sim_ids:
         emutemps_df.index = emutemps_df.index.shift(1, freq=str(step)+'S')
         
         power_df = pd.DataFrame.from_dict(power[sim_id],orient='index')
-        power_df.index = pd.to_datetime(power_df.index).shift(1, freq=str(step)+'S')
+        power_df.index = pd.to_datetime(power_df.index)
         
         opt_stats_df = pd.DataFrame.from_dict(opt_stats[sim_id],orient='index')
         opt_stats_df.index = pd.to_datetime(opt_stats_df.index)
-        #power_df.index = power_df.index.shift(1, freq=str(step)+'S')
+        power_df.index = power_df.index.shift(1, freq=str(step)+'S')
     else:
         emutemps_df1 = pd.DataFrame.from_dict(emutemps[sim_id],orient='index')
         emutemps_df1.index = pd.to_datetime(emutemps_df1.index)
@@ -120,10 +114,7 @@ for sim_id in sim_ids:
         opt_stats_df = pd.concat([opt_stats, opt_stats_df1])
        
     i = i+1
-
-#print(mpctemps[sim_id][time_idx])
-#exit()    
-
+    
 store_namespace(os.path.join(simu_path, folder,'emutemps'),emutemps_df)
 store_namespace(os.path.join(simu_path, folder,'mpctemps'),mpctemps)
 store_namespace(os.path.join(simu_path, folder,'opt_stats'),opt_stats_df)
@@ -148,14 +139,23 @@ if nodynprice==1:
 #print(weather)
 
 # """""""""""" Comfort violations """""""""""""""""""
+#print(constraints_df)
+#print(emutemps_df)
 violation = {}
 #print(constraints_df.loc['Detached_0']['lo'])
 for bldg in bldg_list:
     violation[bldg] = {} 
     for time in emutemps_df[bldg+'_'+model_id].index:
+        #print(emutemps_df[bldg+'_'+model_id][time])
         emutemp = emutemps_df[bldg+'_'+model_id][time]
+        #emutemp = emutemp[time]
+        
+        #emutemp = emutemp.values()
+        #print(emutemp)
         constraint_hi = constraints_df.loc[bldg]['hi'][time]-273.15
-        constraint_lo = constraints_df.loc[bldg]['lo'][time]-273.15
+        constraint_lo = constraints_df.loc[bldg]['lo'][time]-273.15       #print(time)
+        #print(constraint_hi)
+        #print(constraint_lo)
         
         if emutemp > constraint_hi:
             violation[bldg][time] = (emutemp - constraint_hi)*step/3600
@@ -167,13 +167,6 @@ for bldg in bldg_list:
 violation_df = pd.DataFrame.from_dict(violation, orient = 'columns')
 print(violation_df)
 store_namespace(os.path.join(simu_path, folder,'violation_df'),violation_df)
-#print(ref_profile.display_data())
-
-ref_profile_df = pd.DataFrame.from_dict(ref_profile, orient = 'columns')
-#print(ref_profile_df)
-
-aggr_ref_df = load_namespace(os.path.join("'file_path_to_folder'", folder,'ref_profile_AggrMPC')).data['ref_profile'].get_base_data()*tot_cap
-#print(aggr_ref_df)
 
 
 aggr = {}
@@ -186,6 +179,7 @@ for time in controlseq[sim_ids[0]].keys():
     dt.append(control_start)
     aggr[time] = pd.DataFrame.from_dict(controlseq[sim_ids[0]][time],orient='columns')
 
+
 dt = pd.DataFrame(dt,columns = ['Dates'])
 dt = dt.set_index(pd.DatetimeIndex(dt['Dates']))
 index = dt.index
@@ -194,7 +188,9 @@ index = index.sort_values()
 mast_index = index
 
 last_str = index[-1].strftime('%m/%d/%Y %H:%M:%S')
+#real_cont = pd.DataFrame.from_dict(controlseq[sim_ids[0]][last_str],orient='columns')[index[0]:index[-1]]
 real_cont = power_df
+
 real_cont_aggr = real_cont.sum(axis=1)
 
 aggrcom = {}
@@ -204,8 +200,7 @@ for time in aggr.keys():
 store_namespace(os.path.join(simu_path,folder,'real_cont'), real_cont)
 store_namespace(os.path.join(simu_path,folder,'aggr'), aggr)
 store_namespace(os.path.join(simu_path,folder,'aggrcom'), aggrcom)
-store_namespace(os.path.join(simu_path,folder,'ref'), ref_profile_df)
-store_namespace(os.path.join(simu_path,folder,'aggr_ref'), aggr_ref_df)
+
 
 # --------------------- Flexibility factor and peak power ---------------
 if mon == 'jan':
@@ -272,6 +267,8 @@ i = 0
 plot_times=[0,4,8,12,18]
 
 i=0
+
+
 for bldg in [bldg_list[0]]:
     ax.plot(real_cont.index, real_cont[bldg+'_'+model_id].values/1000,'-', label='ref_profile')
     
@@ -279,7 +276,7 @@ for bldg in [bldg_list[0]]:
 ax.set_ylabel('Heat demand [kW]', fontsize=18)
 
 ax1.plot(price.index, price.values, '--o', label="Price")
-ax1.plot(flex_cost[bldg_list[0]+'_'+model_id].index, flex_cost[bldg_list[0]+'_'+model_id].values, '--o', label="Flex Cost")
+#ax1.plot(flex_cost[bldg_list[0]+'_'+model_id].index, flex_cost[bldg_list[0]+'_'+model_id].values, '--o', label="Flex Cost")
 
 handles,labels = [],[]
 for ax in fig.axes:
@@ -289,6 +286,8 @@ for ax in fig.axes:
 
 
 ax1.set_ylabel(r'Price [pounds / kWh]', fontsize=18)
+#ax.legend(fontsize=14, loc = 0)
+#plt.legend(handles,labels, bbox_to_anchor = (1.04,0.5), loc ='center left')
 plt.xticks(rotation=35)
 plt.xlabel("Time",fontsize=18)
 plt.title("Decentralised Algorithm:\n Heat demand under dynamic pricing and loadshaping",fontsize=22)
@@ -306,17 +305,19 @@ plt.clf()
 fig = plt.figure(figsize=(11.69,8.27))
 ax = fig.gca()
 ax1 = ax.twinx()
+#aggr = {}
 i = 0
 #price = price.display_data()
 plot_times=[0,4,8,12,18]
+#print(controlseq.keys())
+
+i=0
 
 ax.plot(real_cont_aggr.index, real_cont_aggr.values/1000,'-x', label='realised')
 
-ax.plot(aggr_ref_df.index, aggr_ref_df.values/1000,'--', label = 'aggr_reference')
 ax.set_ylabel('Heat demand [kW]', fontsize=18)
 
 ax1.plot(price.index, price.values, '--o', label="Price")
-ax1.plot(flex_cost[bldg_list[0]+'_'+model_id].index, flex_cost[bldg_list[0]+'_'+model_id].values, '--o', label="Flex Cost")
 
 
 handles,labels = [],[]
@@ -326,6 +327,8 @@ for ax in fig.axes:
         labels.append(l)
 
 ax1.set_ylabel(r'Price [pounds / kWh]', fontsize=18)
+#ax.legend(fontsize=14, loc = 0)
+#plt.legend(handles,labels, bbox_to_anchor = (1.04,0.5), loc ='center left')
 plt.xticks(rotation=35)
 plt.xlabel("Time",fontsize=18)
 plt.title("Decentralised Algorithm:\n Power demand",fontsize=22)
@@ -342,24 +345,19 @@ plt.clf()
 fig = plt.figure(figsize=(11.69,8.27))
 ax = fig.gca()
 #ax1 = ax.twinx()
-plot_bldgs = [bldg_list[0]]
+plot_bldgs = [0]
 plot_times=[0,1,2,3,4]
-temps = []
 i= 0
+#print(emutemps)
 for sim_id in sim_ids:
-    
-    for bldg in plot_bldgs:
-        for time in mpctemps[sim_id].keys():
-            
-            for t in mpctemps[sim_id][time].index.get_level_values(0):
-                temps.append(mpctemps[sim_id][time][t, bldg+'_'+model_id])
-            
-            #print(temps)
-            ax.plot(mpctemps[sim_id][time].index.get_level_values(0), temps, '-' , label='mpc_'+bldg)    
-            
-            temps = []
-        
-    i = i+1
+    i = 0
+    for time in mpctemps[sim_id].keys():
+        j = 0
+        for bldg in mpctemps[sim_id][time].keys():
+            if j in plot_bldgs:
+                ax.plot(mpctemps[sim_id][time][bldg].index, mpctemps[sim_id][time][bldg].values, '-' , label='mpc_'+bldg)
+            j = j+1
+        i = i+1
 
         
 handles,labels = [],[]
@@ -387,8 +385,10 @@ plt.clf()
 
 fig = plt.figure(figsize=(11.69,8.27))
 ax = fig.gca()
+#ax1 = ax.twinx()
 plot_bldgs = [0]
 i= 0
+#print(emutemps)
 for sim_id in sim_ids:
     if i == 0:
         emutemps_df = pd.DataFrame.from_dict(emutemps[sim_id],orient='index')
@@ -401,6 +401,8 @@ for sim_id in sim_ids:
         emutemps_df = pd.concat([emutemps_df, emutemps_df1])
     i = i+1
 
+#print(emutemps_df)
+
 i = 0
 for bldg in bldg_list:
     ax.plot(emutemps_df.index, emutemps_df.values, '-')
@@ -412,6 +414,8 @@ for ax in fig.axes:
         handles.append(h)
         labels.append(l)
 
+
+#ax.legend(fontsize=14)
 plt.xlabel("Time",fontsize=18)
 plt.ylabel(r"Temperature [$^\circ$C]",fontsize=18)
 plt.title("Decentralised Algorithm: Emulated Temperatures with Cost Minimisation",fontsize=22)
@@ -419,6 +423,7 @@ plt.xticks(rotation=35)
 # We change the fontsize of minor ticks label 
 plt.tick_params(axis='both', which='major', labelsize=12)
 plt.tick_params(axis='both', which='minor', labelsize=12)
+#plt.legend(handles,labels, bbox_to_anchor = (1.04,0.5), loc ='center left')
 plt.savefig(os.path.join(simu_path, folder, "temps_emu.pdf"),bbox_inches="tight")
 plt.savefig(os.path.join(simu_path, folder, "temps_emu.png"),bbox_inches="tight")
 plt.clf()
@@ -452,15 +457,10 @@ price = price[mast_index[0]:mast_index[-1]]
 
 real_cont_re = real_cont_aggr.resample(str(step)+'S').mean()
 real_cont.index = real_cont.index.tz_localize(None)
-#print(real_cont)
-#real_cont.replace(tzinfo=None)
-aggr_ref_df.index=aggr_ref_df.index.tz_localize(None)
-#ref_profile_df.replace(tzinfo=None)
-dr_diff = real_cont_aggr.resample(str(step)+'S').mean()[mast_index[0]:mast_index[-1]] - aggr_ref_df.resample(str(step)+'S').mean()[mast_index[0]:mast_index[-1]]
 
-print(dr_diff)
 
 i=0
+# Reference profile without load-shaping
 for sim_id in sim_ids:
     if i == 0:
         df_wols = pd.DataFrame.from_dict(controlseq[sim_id][controlseq_time],orient='columns')
@@ -471,10 +471,12 @@ for sim_id in sim_ids:
         #power_df1.index = power_df1.index.shift(1, freq=str(step)+'S')
         df_wols = pd.concat([df_wols, df_wols_df1])
 
+compr_capacity_list = [float(4500.0)]*10+[float(3000.0)]*20
 i=0
 for column in df_wols:
     df_wols[column] = df_wols[column]*compr_capacity_list[i]
     i += 1
+    
 #print(df_wols)
 df_wols.index = df_wols.index.tz_localize(None)
 
@@ -482,54 +484,45 @@ store_namespace(os.path.join(simu_path,folder,'ref_wols'), df_wols)
 
 dr_diff_wols = real_cont.resample(str(step)+'S').mean()[mast_index[0]:mast_index[-1]] - df_wols.resample(str(step)+'S').mean()[mast_index[0]:mast_index[-1]]
 
+
 print('%%%%%%%%%%%%%%%% Costs %%%%%%%%%%%%%%%%%%%%%%%%%%')
 
-costs_flex = {}
 costs_elec = {}
 costs = {}
-
-flex_cost[bldg_list[0]+'_'+model_id].index = flex_cost[bldg_list[0]+'_'+model_id].index.tz_localize(None)
 
 price.index = price.index.tz_localize(None)
 
     #price = price['pi_e']
 
-#print(price)
-
-costs_flex =  dr_diff.resample('1800S').mean()*flex_cost[bldg_list[0]+'_'+model_id] / 1000000 * 0.5
+print(price)
 
 for column in real_cont.columns:  
     if nodynprice == 1: 
         costs_elec[column] = real_cont[column].resample('1800S').mean() * price / 1000000 * 0.5 
+        costs[column] = costs_elec[column]
     else:
         costs_elec[column] = real_cont[column].resample('1800S').mean() * price['pi_e'] / 1000000 * 0.5 
+        costs[column] = costs_elec[column]
 
+#costs_flex = pd.DataFrame.from_dict(costs_flex,orient='columns')
 costs_elec = pd.DataFrame.from_dict(costs_elec,orient='columns')
 costs = pd.DataFrame.from_dict(costs,orient='columns')
-
-tot_costs_elec = costs_elec.sum(axis=1)
-
-costs = tot_costs_elec+costs_flex
 
 print('----------------- Electricity costs [pounds]:')
 print(costs_elec)
     
-print('------------------- Flexibility costs [pounds]:')    
-print(costs_flex)
-#print(costs)
 
 print('-------------- Total costs [pounds]:')   
 print(costs)
 
+print('------------------ Total hourly cost for community [pounds]: ')
+print(costs.sum(axis=1))
+
 print('------------------ Total costs over the community: ')
-print(costs.sum(axis=0))
+print(costs.sum(axis=1).sum(axis=0))
 
 print('------------------ Electricity costs over the community: ')
 print(costs_elec.sum(axis=1).sum(axis=0))
-
-print('------------------ Flexibility costs over the community: ')
-print(costs_flex.sum(axis=0))
-
 
 print("-------------------Flexibility metrics and comfort-----------------")
 print("Comfort violations [Ch]: ")
@@ -546,6 +539,8 @@ print(cons_hc.resample('3600S').mean().sum(axis=0).sum(axis=0))
 print("Consumption low cost")
 print(cons_lc.resample('3600S').mean().sum(axis=0).sum(axis=0))
 
+
+
 store_namespace(os.path.join(simu_path,folder,'aggr_bldg'), aggr_bldg)
 store_namespace(os.path.join(simu_path,folder,'aggr_comm'), aggr_comm)
 store_namespace(os.path.join(simu_path,folder,'aggr_total'), aggr_total)
@@ -553,8 +548,6 @@ store_namespace(os.path.join(simu_path,folder,'peak_comm'), peak_comm)
 store_namespace(os.path.join(simu_path,folder,'peak_comm_hh'), peak_comm_hh)
 store_namespace(os.path.join(simu_path,folder,'cons_hc'), cons_hc)
 store_namespace(os.path.join(simu_path,folder,'cons_lc'), cons_lc)
-store_namespace(os.path.join(simu_path,folder,'costs'), costs)
-store_namespace(os.path.join(simu_path,folder,'costs_flex'), costs_flex)
+store_namespace(os.path.join(simu_path,folder,'costs'), costs.sum(axis=1))
+#store_namespace(os.path.join(simu_path,folder,'costs_flex'), costs_flex)
 store_namespace(os.path.join(simu_path,folder,'costs_elec'), costs_elec)
-store_namespace(os.path.join(simu_path,folder,'dr_diff'), dr_diff)
-store_namespace(os.path.join(simu_path,folder,'dr_diff_wols'), dr_diff_wols)

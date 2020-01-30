@@ -84,8 +84,6 @@ if __name__ == "__main__":
                     
         Sim.building = bldg+'_'+model_id
         
-        #Sim.fmupath_mpc = os.path.join(Sim.simu_path, 'fmus',community, 'Tutorial_'+model_id+'_'+model_id+'.fmu')
-        
         Sim.fmupath_emu = os.path.join(Sim.simu_path, 'fmus', community, community+'_'+bldg+'_'+bldg+'_Models_'+bldg+'_House_mpc.fmu')
         
         Sim.fmupath_ref = os.path.join(Sim.simu_path, 'fmus', community, community+'_'+bldg+'_'+bldg+'_Models_'+bldg+'_House_PI.fmu')
@@ -242,41 +240,6 @@ if __name__ == "__main__":
                     results_dict[case+'_'+Sim.building]['MSE-resid'] = Sim.ARX_model.fit_results.mse_resid 
                     results_dict[case+'_'+Sim.building]['R2-ID'] = Sim.ARX_model.fit_results.rsquared 
                     
-                    ''' Plot for checks 
-                    plt.figure(figsize=(12,6))
-                    plot_index = df_train.index
-                    
-                    plt.plot(plot_index, preds,label='predictions_'+Sim.building)
-                    plt.plot(plot_index, df_train['TAir'].values, label='true_'+Sim.building)
-                    plt.legend()
-                    plt.savefig(os.path.join(folder, case, Sim.building+'_'+mon+"_id.png"), bbox_inches="tight")
-                    #plt.savefig(os.path.join(folder, analysis_folder, Sim.building+ "_valid.pdf"), bbox_inches="tight")
-                    plt.close()
-                    '''
-                    '''
-                    if i == 0:
-                        Plot for checks - ACF 
-                        plt.figure(figsize=(12,6))
-                        #plt.plot(Sim.ARX_model.acf)
-                        plot_acf(train_data[target].values)
-                        plt.savefig(os.path.join(folder, Sim.building+'_'+mon+"_acf.png"), bbox_inches="tight")
-                        #plt.savefig(os.path.join(folder, analysis_folder, Sim.building+ "_valid.pdf"), bbox_inches="tight")
-                        #plt.show()
-                        plt.close()
-                        
-                        Plot for checks - PACF 
-                        plt.figure(figsize=(12,6))
-                                
-                        plot_pacf(train_data[target].values, lags=40, method='ols')
-                        #plt.plot(Sim.ARX_model.pacf)
-                        #plt.plot(Sim.ARX_model.pacf_confint, color='red')
-                        plt.savefig(os.path.join(folder, Sim.building+'_'+mon+"_pacf.png"), bbox_inches="tight")
-                        #plt.savefig(os.path.join(folder, analysis_folder, Sim.building+ "_valid.pdf"), bbox_inches="tight")
-                        #plt.show()
-                        plt.close()
-                        '''
-                    
-                    
                     '''Validate'''
                     # Make some predictions
                     test_x = df_test[features].values 
@@ -285,19 +248,7 @@ if __name__ == "__main__":
                     
                     mse = mean_squared_error(df_test['TAir'].values, preds)
                     rscore = r2_score(df_test['TAir'].values, preds)
-                    
-                    ''' Plot for checks 
-                    plt.figure(figsize=(12,6))
-                    plot_index = df_test.index
-                    
-                    plt.plot(plot_index, preds,label='predictions_'+Sim.building)
-                    plt.plot(plot_index, df_test['TAir'].values, label='true_'+Sim.building)
-                    plt.legend()
-                    plt.savefig(os.path.join(folder, Sim.building+'_'+mon+"_valid.png"), bbox_inches="tight")
-                    plt.close()
-                    '''
-                    #plt.savefig(os.path.join(folder, Sim.building+ "_valid.pdf"), bbox_inches="tight")
-                    
+ 
                     print('Mean squared error - validation')
                     print(mean_squared_error(df_test['TAir'].values, preds))
 

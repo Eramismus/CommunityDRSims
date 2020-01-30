@@ -12,16 +12,11 @@ import datetime
 from matplotlib.font_manager import FontProperties
 
 from matplotlib import rc
-#rc('font',**{'family':'sans-serif','sans-serif':['Helvetica']})
-#for Palatino and other serif fonts use:
-#rc('font',**{'family':'serif','serif':['Palatino']})
-#rc('text', usetex=True)
 
 community = 'ResidentialCommunity'
 sim_ids = ['MinEne_0-30']
 model_id = 'R2CW_HP'
 bldg_list = load_namespace(os.path.join('file_path_to_folder', 'teaser_bldgs_residential'))
-#bldg_list = [bldg_list[0]]
 compr_capacity_list = [float(4500.0)]*10+[float(3000.0)]*20
 print(bldg_list)
 folder = 'results'
@@ -29,7 +24,6 @@ step = 300
 nodynprice=0
 mon = 'nov'
 constr_folder = 'decentr_enemin_constr_'+mon
-#bldg_list = bldg_list[0:1]
 if mon == 'jan':
     start = '1/7/2017 16:30:00'
     end = '1/7/2017 19:00:00'
@@ -64,20 +58,11 @@ i = 0
 for bldg in bldg_list:
 
     building = bldg+'_'+model_id
-
-    #price[building] = load_namespace(os.path.join(simu_path, folder, 'price_'+building))
-    
-    #constraints[building] = load_namespace(os.path.join(simu_path, folder, 'constraints_'+building))
-    
-    #other_input[building] = load_namespace(os.path.join(simu_path, folder, 'other_input_'+building))
     
     flex_cost[building] = load_namespace(os.path.join(simu_path, folder, 'flex_cost_'+bldg+'_'+model_id)).data['flex_cost'].get_base_data()
     flex_cost[building] = flex_cost[building].resample(str(step)+'S').mean().shift(0, freq=str(step) + 'S')
     
     ref_profile[building] = load_namespace(os.path.join("'file_path_to_folder'", folder,'ref_profile_'+bldg+'_'+model_id)).data['ref_profile'].get_base_data()*compr_capacity_list[i]
-    #print(ref_profile[building])
-    #opt_control[building] = load_namespace(os.path.join(simu_path, folder, 'opt_control_DRCost_'+building))
-#print(flex_cost)
     i += 1
 
 
@@ -101,9 +86,7 @@ for sim_id in sim_ids:
 
         controlseq[sim_id][time_idx] = load_namespace(os.path.join(simu_path, folder, 'controlseq_'+sim_id)+'_'+t)
         power[sim_id][time_idx] = load_namespace(os.path.join(simu_path, folder, 'power_'+sim_id)+'_'+t)
-    #flex_down[sim_id] = load_namespace(os.path.join(simu_path, folder, 'flex_down'+sim_id))
-    #flex_up[sim_id] = load_namespace(os.path.join(simu_path, folder, 'flex_up'+sim_id))
-    
+
 i=0
 for sim_id in sim_ids:
     if i == 0:
@@ -156,11 +139,8 @@ price = price.display_data()
 
 if nodynprice==1:
     price = pd.Series(50, price.index,name='pi_e')
-#print(weather)
-
+    
 # """""""""""" Comfort violations """""""""""""""""""
-#print(constraints_df)
-#print(emutemps_df)
 violation = {}
 #print(constraints_df.loc['Detached_0']['lo'])
 for bldg in bldg_list:
@@ -168,15 +148,9 @@ for bldg in bldg_list:
     for time in emutemps_df[bldg+'_'+model_id].index:
         #print(emutemps_df[bldg+'_'+model_id][time])
         emutemp = emutemps_df[bldg+'_'+model_id][time]
-        #emutemp = emutemp[time]
-        
-        #emutemp = emutemp.values()
-        #print(emutemp)
+
         constraint_hi = constraints_df.loc[bldg]['hi'][time]-273.15
         constraint_lo = constraints_df.loc[bldg]['lo'][time]-273.15
-        #print(time)
-        #print(constraint_hi)
-        #print(constraint_lo)
         
         if emutemp > constraint_hi:
             violation[bldg][time] = (emutemp - constraint_hi)*step/3600
@@ -188,14 +162,9 @@ for bldg in bldg_list:
 violation_df = pd.DataFrame.from_dict(violation, orient = 'columns')
 print(violation_df)
 store_namespace(os.path.join(simu_path, folder,'violation_df'),violation_df)
-#print(ref_profile.display_data())
 
 ref_profile_df = pd.DataFrame.from_dict(ref_profile, orient = 'columns')
-#print(ref_profile_df)
-
 aggr_ref_df = ref_profile_df.sum(axis = 1)
-#print(aggr_ref_df)
-
 
 aggr = {}
 dt = []
@@ -206,9 +175,7 @@ for time in controlseq[sim_ids[0]].keys():
     control_end = datetime.datetime.strptime(time, '%m/%d/%Y %H:%M:%S') + datetime.timedelta(seconds = 10*int(step))
     dt.append(control_start)
     aggr[time] = pd.DataFrame.from_dict(controlseq[sim_ids[0]][time],orient='columns')
-    #aggr[time] = pd.concat([aggr[time], pd.DataFrame.from_dict(controlseq['MinDRCost_decentr_10-20'][time],orient='columns')[control_start:control_end]], axis=1)
-    #aggr[time] = pd.concat([aggr[time], pd.DataFrame.from_dict(controlseq['MinDRCost_decentr_20-30'][time],orient='columns')[control_start:control_end]], axis=1)
-
+    
 dt = pd.DataFrame(dt,columns = ['Dates'])
 dt = dt.set_index(pd.DatetimeIndex(dt['Dates']))
 index = dt.index
@@ -217,10 +184,7 @@ index = index.sort_values()
 mast_index = index
 
 last_str = index[-1].strftime('%m/%d/%Y %H:%M:%S')
-#real_cont = pd.DataFrame.from_dict(controlseq[sim_ids[0]][last_str],orient='columns')[index[0]:index[-1]]
 real_cont = power_df
-#real_cont = pd.concat([real_cont, pd.DataFrame.from_dict(controlseq['MinDRCost_decentr_10-20'][last_str],orient='columns')[index[0]:index[-1]], pd.DataFrame.from_dict(controlseq['MinDRCost_decentr_20-30'][last_str],orient='columns')[index[0]:index[-1]]], axis=1)
-#print(aggr)
 
 real_cont_aggr = real_cont.sum(axis=1)
 
@@ -285,24 +249,8 @@ print(peak)
 
 
 print('%%%%%%%%%---- Plots ----%%%%%%%')
-'''
-print(opt_stats)
-
-print(mpctemps)
-print(emutemps)
-
-print(controlseq)
-
-print(opt_control)
-
-print(price.display_data())
-
-print(flex_cost.display_data())
-'''
 
 fig_folder = os.path.join(simu_path, folder, 'figs')
-#print(controlseq)
-#print(flex_cost.display_data())
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 # Prices
@@ -311,15 +259,6 @@ ax = fig.gca()
 ax1 = ax.twinx()
 i = 0
 plot_times=[0,4,8,12,18]
-
-i=0
-#print(ref_profile['Detached_0_R2CW'].index.freq)
-for time in aggr.keys():
-    #aggrcom[time] = aggrcom[time].sum(axis=1)
-    #if i in plot_times:
-    #print(aggr[time].index.freq)
-    #ax.plot(aggr[time].index, aggr[time].values,'-', label=str(time)+' '+'output')
-    i=i+1
 
 for bldg in [bldg_list[0]]:
     ax.plot(ref_profile[bldg+'_'+model_id].index, ref_profile[bldg+'_'+model_id].values/1000,'--', label='ref_profile')
@@ -339,8 +278,6 @@ for ax in fig.axes:
 
 
 ax1.set_ylabel(r'Price [pounds / kWh]', fontsize=18)
-#ax.legend(fontsize=14, loc = 0)
-#plt.legend(handles,labels, bbox_to_anchor = (1.04,0.5), loc ='center left')
 plt.xticks(rotation=35)
 plt.xlabel("Time",fontsize=18)
 plt.title("Decentralised Algorithm:\n Heat demand under dynamic pricing and loadshaping",fontsize=22)
@@ -349,8 +286,6 @@ plt.tick_params(axis='both', which='major', labelsize=12)
 plt.tick_params(axis='both', which='minor', labelsize=12)
 plt.savefig(os.path.join(simu_path, folder, "mincost_price.png"))
 plt.clf()
-#plt.close()
-#plt.close('all')
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -358,24 +293,7 @@ plt.clf()
 fig = plt.figure(figsize=(11.69,8.27))
 ax = fig.gca()
 ax1 = ax.twinx()
-#aggr = {}
-i = 0
-#price = price.display_data()
 plot_times=[0,4,8,12,18]
-#print(controlseq.keys())
-
-i=0
-#print(aggrcom)
-
-#print(aggr_ref_df.index.freq)
-#print(aggr_ref_df)
-
-for time in aggrcom.keys():
-    #aggrcom[time] = aggrcom[time].sum(axis=1)
-    #if i in plot_times:
-    #print(aggrcom[time].index.freq)
-    #ax.plot(aggrcom[time].index, aggrcom[time].values,'-+', label=str(time)+' '+'output')
-    i=i+1
 
 ax.plot(real_cont_aggr.index, real_cont_aggr.values/1000,'-x', label='realised')
 
@@ -393,8 +311,6 @@ for ax in fig.axes:
         labels.append(l)
 
 ax1.set_ylabel(r'Price [pounds / kWh]', fontsize=18)
-#ax.legend(fontsize=14, loc = 0)
-#plt.legend(handles,labels, bbox_to_anchor = (1.04,0.5), loc ='center left')
 plt.xticks(rotation=35)
 plt.xlabel("Time",fontsize=18)
 plt.title("Decentralised Algorithm:\n Power demand",fontsize=22)
@@ -525,20 +441,10 @@ price = price[mast_index[0]:mast_index[-1]]
 
 real_cont_re = real_cont_aggr.resample(str(step)+'S').mean()
 real_cont.index = real_cont.index.tz_localize(None)
-#print(real_cont)
-#real_cont.replace(tzinfo=None)
 ref_profile_df.index=ref_profile_df.index.tz_localize(None)
-#ref_profile_df.replace(tzinfo=None)
 dr_diff = real_cont.resample(str(step)+'S').mean()[mast_index[0]:mast_index[-1]] - ref_profile_df.resample(str(step)+'S').mean()[mast_index[0]:mast_index[-1]]
 
-
-
-#print(ref_profile_df)
 i=0
-#print(controlseq.keys())
-#print(controlseq[sim_id].keys())
-#print(controlseq[sim_id][bldg_list[0]].keys())
-# Reference profile without load-shaping
 for sim_id in sim_ids:
     if i == 0:
         df_wols = pd.DataFrame.from_dict(controlseq[sim_id][controlseq_time],orient='columns')
@@ -562,33 +468,15 @@ store_namespace(os.path.join(simu_path,folder,'ref_wols'), df_wols)
 
 dr_diff_wols = real_cont.resample(str(step)+'S').mean()[mast_index[0]:mast_index[-1]] - df_wols.resample(str(step)+'S').mean()[mast_index[0]:mast_index[-1]]
 
-#print(dr_diff_wols)
-#dr_diff = dr_diff.resample('1800S').mean()
-#print(dr_diff)
-#flex_cost = pd.DataFrame(flex_cost,columns = ['flex_cost'])
-#flex_cost = flex_cost.set_index(pd.DatetimeIndex(flex_cost.index))
-#print(flex_cost)
-#print(flex_cost[flex_index[0]:flex_index[-1]]['flex_cost'])
-
 print('%%%%%%%%%%%%%%%% Costs %%%%%%%%%%%%%%%%%%%%%%%%%%')
-#print(price.display_data()[index[0]:index[-1]])
-
-#costs_elec = (real_cont_re * price['pi_e']) / 1000000 * 0.5  
 
 costs_flex = {}
 costs_elec = {}
 costs = {}
-#print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
-#print(dr_diff)
-#print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')    
-#print(flex_cost)
 
 flex_cost[bldg_list[0]+'_'+model_id].index = flex_cost[bldg_list[0]+'_'+model_id].index.tz_localize(None)
 
 price.index = price.index.tz_localize(None)
-
-    #price = price['pi_e']
-
 print(price)
 
 for column in dr_diff.columns:  
@@ -599,10 +487,7 @@ for column in dr_diff.columns:
     else:
         costs_elec[column] = real_cont[column].resample('1800S').mean() * price['pi_e'] / 1000000 * 0.5 
         costs[column] = costs_flex[column] + costs_elec[column]
-
-#print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')    
-#print(costs_flex)
-    
+        
 costs_flex = pd.DataFrame.from_dict(costs_flex,orient='columns')
 costs_elec = pd.DataFrame.from_dict(costs_elec,orient='columns')
 costs = pd.DataFrame.from_dict(costs,orient='columns')
@@ -644,8 +529,6 @@ print("Consumption high cost")
 print(cons_hc.resample('3600S').mean().sum(axis=0).sum(axis=0))
 print("Consumption low cost")
 print(cons_lc.resample('3600S').mean().sum(axis=0).sum(axis=0))
-
-
 
 store_namespace(os.path.join(simu_path,folder,'aggr_bldg'), aggr_bldg)
 store_namespace(os.path.join(simu_path,folder,'aggr_comm'), aggr_comm)

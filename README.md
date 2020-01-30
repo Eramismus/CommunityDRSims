@@ -1,6 +1,35 @@
+# Journal paper
+
+### Contracted energy flexibility characteristics of communities: Analysis of a control strategy for demand response
+
+The folder is called journal_paper, which presents the code for the journal paper accepted for Applied Energy. Simulator_HP_mod3.py contains python functions for running different types of simulations and to initialise the models from the fmus. The models are in the fmu-folder. Constraints for optimisation are stored as pickle-files in the constraints-folder. funcs.py contains functions to perform basic operations such as read and save variables. R2C2_model.py is class used to handle the ARX-models used for the MPC. 
+
+Below is more information about the different steps.
+
+## System Identification
+sys_id_arx_jan.py provides an example of how the ARX-model identification was performed for January case day. A set of models evaluated for each endogenous lag configuration. The combinations were formed by forward addition of different exogenous parameters in order to each endogenous lag configuration. In total 40 ARX-model configurations were evaluated for each building.
+
+## Demand Response Cases
+1. Decentralised, demand response, pulp_dr_30bldgs.py
+2. Centralised, demand response, pulp_dr_centr_30bldgs.py
+
+## Reference Cases
+1. Minimise energy consumption, decentralised, pulp_enemin_30bldgs.py
+2. PI control in each house, PISim.py.
+
+## Analysis
+Analysis is done in two phases: 
+1. Analyse each case including references are analysed with analyser_cen_30bldgs.py, analyser_dec_30bldgs.py or analyser_dec_enemin_30bldgs.py
+2. Analyse all cases together and generate plots and csvs for communication, results in the results-folder.
+
+## Results
+Under results-folder key tables and figures used in the paper are included as files.
+
+Final note: the code is poorly commented as it was written "on the fly" for research purposes. For any questions, you can just contact the author, Eramismus.
+
 # IBPSA paper
 
-Simulator_HP_mod2.py and Simulator_HP_mod3.py contains python functions for running different types of simulations and to initialise the models from the fmus or mo-files.
+The folder is ibpsa_paper. Simulator_HP_mod2.py and Simulator_HP_mod3.py contains python functions for running different types of simulations and to initialise the models from the fmus or mo-files.
 
 funcs.py contains functions to perform basic operations such as read and save variables etc.
 
